@@ -1,0 +1,728 @@
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+
+function App() {
+  return (
+      <section>
+          <div>
+              AUK Course
+              <h2>Ayesh</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <Main>
+              <h5>Ayesh Chathuranga</h5>
+              <span>I'm a child</span>
+          </Main>
+          <Main />
+          <Main />
+          <Main />
+          <Main />
+      </section>
+  );
+}
+
+export default App;
+
+//----------Components/Main.js
+const name = "Ayesh Chathuranga";
+const position = "Software Engineer";
+
+const myObj = {
+    name: `${name}`,
+    position: `${position}`,
+    city: "Tangalle"
+}
+
+function Main({children}) {
+    console.log(children);
+    const { city } = myObj;
+
+    return (
+        <div>
+            <ul>
+                <li>{myObj.name}</li>
+                <li>{position}</li>
+                <li>{city}</li>
+                <li>JavaScript</li>
+            </ul>
+            {children}
+        </div>
+    )
+};
+
+export default Main;
+
+//==========================================
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+
+function App() {
+  return (
+      <section>
+          <div>
+              AUK Course
+              <h2>Ayesh</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <Main name='Ayesh' city='Makandura' position='Web Developer'>
+              <h5>Ayesh Chathuranga</h5>
+              <span>I'm a child</span>
+          </Main>
+          <Main name='Eshara' city='Galle' position='Software Engineer' />
+          <Main name='Thisara' city='Matara' position='Graphic Designer' />
+      </section>
+  );
+}
+
+export default App;
+
+
+//----------Components/Main.js
+function Main({children, name, city, position}) {
+    console.log(children);
+
+    return (
+        <div>
+            <ul>
+                <li>{name}</li>
+                <li>{city}</li>
+                <li>{position}</li>
+                <li>JavaScript</li>
+            </ul>
+            {children}
+        </div>
+    )
+};
+
+export default Main;
+//==========================================
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData,myData2} from "./Data/myData";
+
+const NewBlock = () => {
+    return <>
+        {
+        myData2?.map(({ id,name, city, position }, index) => {
+        return <Main key={id} name={name} city={city} position={position} />;
+        })}
+    </>
+}
+
+function App() {
+    /*const mainBlock = myData.map(({ id,name, city, position }, index) => {
+        return <Main key={id} name={name} city={city} position={position} />;
+    });*/
+
+  return (
+      <section>
+          <div>
+              AUK Course
+              <h2>Ayesh</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <NewBlock />
+      </section>
+  );
+}
+
+export default App;
+
+//----------Components/Main.js
+function Main({ name, city, position}) {
+    return (
+        <div>
+            <ul>
+                <li>{name}</li>
+                <li>{city}</li>
+                <li>{position}</li>
+                <li>JavaScript</li>
+            </ul>
+        </div>
+    )
+};
+
+export default Main;
+
+//----------Data/myData.js
+export const myData = [
+    { id: 1234, name: "Ayesh",city: "Makandura", position: "Web Developer",},
+    { id: 1235, name: "Eshara",city: "Kamburupitiya", position: "Software Developer",},
+    { id: 1236,name: "Thisara", city: "Makandura" ,position: "Graphic Designer",},
+    { id: 1237,name: "Sachindu", city: "Colombo", position: "UI/UX Designer",},
+];
+
+export const myData2 = undefined;
+
+//==================== React Fragment
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData,myData2} from "./Data/myData";
+import {Fragment} from "react";
+
+const NewBlock = () => {
+    return <Fragment>
+        {
+        myData?.map(({ id,name, city, position }, index) => {
+        return <Main key={id} name={name} city={city} position={position} />;
+        })}
+    </Fragment>
+}
+
+function App() {
+
+  return (
+      <Fragment>
+          <div>
+              AUK Course
+              <h2>Ayesh</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <NewBlock />
+      </Fragment>
+  );
+}
+
+export default App;
+
+//==========================================
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+
+function App() {
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={id} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>Ayesh</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+      </div>
+  );
+}
+
+export default App;
+
+//----------Data/myData.js
+import laptop from '../assets/laptop.jpg';
+
+export const myData = [
+    { id: 1234, name: "Ayesh",city: "Makandura", image: laptop, position: "Web Developer",},
+    { id: 1235, name: "Eshara",city: "Kamburupitiya", position: "Software Developer",},
+    { id: 1236,name: "Thisara", city: "Makandura" ,position: "Graphic Designer",},
+    { id: 1237,name: "Sachindu", city: "Colombo", position: "UI/UX Designer",},
+];
+
+export const myData2 = undefined;
+
+//----------App.css
+.main_container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainBlock_container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.mainBlock_container img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.mainBlock_details div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+//----------Components/Main.js
+import dog from '../assets/dog.jpg';
+
+function Main({ name, city, image, position}) {
+    return (
+        <div>
+            <img src={image ? `${image}` : `${dog}`} alt="dog" />
+            <div className="mainBlock_details">
+                <h3>{!name ? `No name` : `${name}`}</h3>
+                <div>
+                <span>{city}</span>
+                <span>{position}</span>
+                </div>
+            </div>
+        </div>
+    )
+};
+
+export default Main;
+
+//==========================================
+
+//==================== useState
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+import {useState} from "react";
+
+function App() {
+    const [myVar, setMyVar] = useState("upul");
+
+    const clickHandle = () => {
+        setMyVar("pavan");
+    }
+
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={id} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{myVar}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+import {useState} from "react";
+
+function App() {
+    const [myVar, setMyVar] = useState({
+        name: "Ayesh",city: "Makandura", position: "Web Developer"
+    });
+
+    const clickHandle = () => {
+        setMyVar({
+            ...myVar,
+            name: "Pavan",
+        });
+    }
+
+    console.log(myVar);
+
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={id} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{myVar.name}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+import {useState} from "react";
+import laptop from "./assets/laptop.jpg";
+
+function App() {
+    const [myVar, setMyVar] = useState({
+        name: "Ayesh",city: "Makandura", position: "Web Developer"
+    });
+    const [myDataState, setMyDataState] = useState(myData);
+
+    const clickHandle = () => {
+        setMyVar({
+            ...myVar,
+            name: "Pavan",
+        });
+
+        setMyDataState([
+            ...myDataState,
+            { id: 1234, name: "Ayesh",city: "Makandura", image: laptop, position: "Web Developer",},
+        ]);
+    }
+
+    const mainBlock = myDataState.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{myVar.name}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+import {useState} from "react";
+import laptop from "./assets/laptop.jpg";
+
+function App() {
+    const [inputVal, setInputVal] = useState('');
+    const [myDataState, setMyDataState] = useState(myData);
+
+    const clickHandle = () => {
+        setMyDataState([
+            ...myDataState,
+            { id: 1234, name: "Ayesh",city: "Makandura", image: laptop, position: "Web Developer",},
+        ]);
+    }
+
+    const mainBlock = myDataState.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{inputVal}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+          <input type="text" style={{border: "1px solid red", fontSize: "14px", padding: "7px 12px"}} placeholder="type what you wan't" onChange={(e)=> {
+              e.preventDefault();
+              setInputVal(e.target.value);
+          }} />
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {myData} from "./Data/myData";
+import {useState} from "react";
+import laptop from "./assets/laptop.jpg";
+
+function App() {
+    const [inputVal, setInputVal] = useState('');
+    const [myDataState, setMyDataState] = useState(myData);
+
+    const clickHandle = () => {
+        setMyDataState([
+            ...myDataState,
+            { id: 1234, name: "Ayesh",city: "Makandura", image: laptop, position: "Web Developer",},
+        ]);
+    }
+
+    const mainBlock = myDataState.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+    const inputChangeHandle = (event, data) => {
+        event.preventDefault();
+        console.log(data);
+        setInputVal(event.target.value);
+    }
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{inputVal}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+          <input type="text"
+                 style={{border: "1px solid red", fontSize: "14px", padding: "7px 12px"}}
+                 placeholder="type what you wan't"
+                 onChange={(e)=> {
+                     inputChangeHandle(e, inputVal);
+                 }} />
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {useState} from "react";
+import {myData} from "./Data/myData";
+
+function App() {
+    const [inputVal, setInputVal] = useState(0);
+
+    const clickHandle = () => {
+        setTimeout(() => {
+            console.log("I am clicked");
+            setInputVal(inputVal + 1);
+        }, 3000);
+    }
+
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{inputVal}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//==================== pre Value
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {useState} from "react";
+import {myData} from "./Data/myData";
+
+function App() {
+    const [inputVal, setInputVal] = useState(0);
+
+    const clickHandle = () => {
+        setTimeout(() => {
+            console.log("I am clicked");
+            setInputVal((prev) => prev + 1);
+        }, 3000);
+    }
+
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{inputVal}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//----------App.js
+import './App.css';
+import Main from "./Components/Main";
+import {useState} from "react";
+import {myData} from "./Data/myData";
+
+function App() {
+    const [inputVal, setInputVal] = useState(0);
+
+    const clickHandle = () => {
+        setTimeout(() => {
+            console.log("I am clicked");
+            setInputVal((prev) => {
+                if(prev < 1){
+                    return prev + 1;
+                } else if (prev < 2){
+                    return prev + 3;
+                } else {
+                    return prev + 2;
+                }
+            });
+        }, 2000);
+    }
+
+    const mainBlock = myData.map(({ id,name, city, image, position }, index) => {
+        return <Main key={index} name={name} city={city} image={image} position={position} />;
+    });
+
+  return (
+      <div className="main_container">
+          <div>
+              AUK Course
+              <h2>{inputVal}</h2>
+          </div>
+          <h1>Chathuranga</h1>
+          <div className="mainBlock_container">
+          {mainBlock}
+          </div>
+          <br/>
+          <br/>
+          <button
+              style={{
+                fontSize: "12px",
+                border: "1px solid red",
+                padding: "7px 12px",
+            }}
+
+              onClick={clickHandle}
+          >
+              Click Me
+          </button>
+      </div>
+  );
+}
+
+export default App;
+
+//==================== Direct Return
+
+//----------App.js
+const App = () => (
+    <div>
+        <h1>Ayesh Chathuranga</h1>
+    </div>
+)
+
+export default App;
+
