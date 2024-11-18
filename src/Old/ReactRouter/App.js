@@ -1,10 +1,10 @@
-// import './App.css';
+import './App.css';
 import Home from "./Components/Home";
 import About from "./Components/About";
+import ContactDetails from "./Components/ContactDetails";
 import Contact from "./Components/Contact";
+import User from "./Components/User";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Project from "./Components/Project";
-import styled from "styled-components";
 
 const router = createBrowserRouter([
     {
@@ -20,23 +20,23 @@ const router = createBrowserRouter([
         element: <Contact />,
     },
     {
-        path: "/project",
-        element: <Project />,
+        path: "/contact/details",
+        element: <ContactDetails />,
+    },
+    {
+        path: "/contact/:id",
+        element: <User />
     }
 ])
 
 const App = () => {
     return (
-        <AppContainer>
+        <div>
             <RouterProvider router={router} />
-        </AppContainer>
+        </div>
     )
 
 }
 
-export default App;
 
-const AppContainer = styled.main`
-    width: 100vw;
-    overflow-x: hidden;
-`;
+export default App;

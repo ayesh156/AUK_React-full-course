@@ -726,3 +726,327 @@ const App = () => (
 
 export default App;
 
+//==================== Use Effect
+
+//----------App.js
+useEffect(() => {
+     console.log("use effect calling...")
+});
+
+useEffect(() => {
+        console.log("use effect calling...")
+    }, [inputData.name, inputData.position]);
+
+//====================
+const [inputData, setInputData] = useState({
+        imageUrl: '',
+        name: '',
+        city: '',
+        position: '',
+    });
+
+useEffect(() => {
+        console.log("use effect calling...")
+    }, [inputData.name, inputData.position]);
+
+//====================
+ const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const changeWindowWdith = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", changeWindowWdith);
+
+        console.log("use effect calling...")
+    }, [inputData.name]);
+
+    return (
+        <Fragment >
+            <Header />
+            <div className="main_container">
+                <h1>{windowWidth}</h1>
+
+//==================== Cleanup process
+
+useEffect(() => {
+        const changeWindowWdith = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", changeWindowWdith);
+
+        console.log("use effect calling...");
+
+        return () => {
+            console.log("use effect cleanup function running...");
+            window.removeEventListener("resize", changeWindowWdith);
+        }
+
+    }, [inputData.name]);
+
+
+//==================== Api call with cleanup process
+import { useEffect, useState} from "react";
+import './App.css';
+
+const App = () => {
+    const [apiId, setApiId] = useState("1");
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        console.log("useEffect running...");
+
+        const apiCall = async () => {
+            console.log("api call running...");
+            const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${apiId}`);
+
+            const resData = await res.json();
+
+            if (resData) {
+                setData(resData);
+            }
+        };
+
+        if(apiId.length > 0 && Number(apiId) > 0 && Number(apiId) <= 100) {
+            console.log("useEffect if condition");
+            apiCall();
+        }
+
+        return () => {
+            console.log("Cleanup API call...");
+            apiCall();
+        }
+
+    }, [apiId]);
+
+    return (
+        <div>
+            <input type="text"
+                   value={apiId}
+                   placeholder="Enter id"
+                   onChange={(e)=> setApiId(e.target.value)}
+            />
+            {data && (
+                <div>
+                    <h2>{data.title}</h2>
+                    <p>{data.body}</p>
+                </div>
+            )}
+        </div>
+    )
+}
+
+
+export default App;
+
+//==================== data fetch with Button click
+
+import { useEffect, useState} from "react";
+import './App.css';
+
+const App = () => {
+    const [apiId, setApiId] = useState("1");
+    const [data, setData] = useState({});
+    const [search, setSearch] = useState(0);
+
+    useEffect(() => {
+        console.log("useEffect running...");
+
+        const apiCall = async () => {
+            console.log("api call running...");
+            const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${apiId}`);
+
+            const resData = await res.json();
+
+            if (resData) {
+                setData(resData);
+            }
+        };
+
+        if(apiId.length > 0 && Number(apiId) > 0 && Number(apiId) <= 100) {
+            console.log("useEffect if condition");
+            apiCall();
+        }
+
+        return () => {
+            console.log("Cleanup API call...");
+            apiCall();
+        }
+
+//eslint-disable-next-line
+    }, [search]);
+
+    return (
+        <div>
+            <input type="text"
+                   value={apiId}
+                   placeholder="Enter id"
+                   onChange={(e)=> setApiId(e.target.value)}
+            />
+            <button onClick={()=>setSearch(pre=>pre===0?1:0)}>Search</button>
+            {data && (
+                <div>
+                    <h2>{data.title}</h2>
+                    <p>{data.body}</p>
+                </div>
+            )}
+        </div>
+    )
+}
+
+
+export default App;
+
+//========================================== react-router-dom
+
+//----------App.js
+
+import './App.css';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./Components/Home";
+import About from "./Components/About";
+import ContactDetails from "./Components/ContactDetails";
+import Contact from "./Components/Contact";
+import User from "./Components/User";
+
+const App = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/contact/details" element={<ContactDetails />} />
+                <Route path="/contact/:id" element={<User />} />
+            </Routes>
+        </BrowserRouter>
+    )
+
+}
+
+
+export default App;
+
+//==================== react-router-dom new method
+
+//----------App.js
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+    },
+    {
+        path: "/about",
+        element: <About />,
+    },
+    {
+        path: "/contact",
+        element: <Contact />,
+    },
+    {
+        path: "/contact/details",
+        element: <ContactDetails />,
+    },
+    {
+        path: "/contact/:id",
+        element: <User />
+    }
+])
+
+const App = () => {
+    return (
+        <div>
+            <RouterProvider router={router} />
+        </div>
+    )
+
+}
+
+//========================================== tyled-components
+
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import styled from "styled-components";
+import laptop from '../assets/laptop.jpg';
+
+const Contact = () => {
+    const [mainData, setMainData] = useState([]);
+    const [themeChange, setThemeChange] = useState(false);
+
+    useEffect(() => {
+        const dataFetching = async () => {
+            const res = await fetch(`https://jsonplaceholder.typicode.com/posts/`);
+            const data = await res.json();
+            if (data) {
+                setMainData(data);
+            }
+        }
+
+        dataFetching();
+    })
+    return (
+    <ContactContainer>
+        <h1>Contact page</h1>
+        <button onClick={()=> setThemeChange(pre=>!pre)}>Change Theme</button>
+        <ContactBlock>
+        {mainData?.map(({id, title}) => (
+            <Link to={`/contact/${id}`} key={id} >
+                <ContactBlockUnit changeTheme={themeChange}>
+                    <img src={laptop} alt="contact block unit"/>
+                    <h3>{title}</h3>
+                </ContactBlockUnit>
+            </Link>
+        ))}
+        </ContactBlock>
+    </ContactContainer>
+)};
+
+export default Contact;
+
+const ContactContainer = styled.main`
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const ContactBlock = styled.div`
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 25px;
+`;
+
+const ContactBlockUnit = styled.div`
+    padding: 20px;
+    border-radius: 7px;
+    border: 2px solid ${({changeTheme}) => {
+        if(changeTheme) {
+            return "black";
+        } else {
+            return "#f7b0b0";
+        }
+    }};
+    background-color: ${(props) => (props.changeTheme ? "black" : "#f7b0b0")};
+    transition: all 0.4s ease-in;
+
+    &:hover {
+        background-color: inherit;
+    }
+
+    img{
+        width: 100%;
+        object-fit: contain;
+    }
+
+    h3{
+        font-size: 14px;
+    }
+`;
+
+//==========================================
