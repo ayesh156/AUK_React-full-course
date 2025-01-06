@@ -5,6 +5,7 @@ import Contact from "./Components/Contact";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Project from "./Components/Project";
 import styled from "styled-components";
+import Socket from "./Components/Socket";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     {
         path: "/project",
         element: <Project />,
+    },
+    {
+        path: "/socket",
+        element: <Socket />,
     }
 ])
 

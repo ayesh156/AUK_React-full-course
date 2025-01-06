@@ -14,7 +14,95 @@ body {
   overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  width: 100%;
+  padding: 20px;
+  height: 100vh; /* Adjust as per your needs */
+  overflow-y: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+td {
+  background-color: #fafafa;
+}
+
+tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+/* Light Theme */
+.light-theme {
+  background-color: #f4f4f4;
+  color: #000;
+}
+
+.light-theme table {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.light-theme th {
+  background-color: #f1f1f1;
+}
+
+.light-theme td {
+  background-color: #fafafa;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #181818;
+  color: #fff;
+}
+
+.dark-theme table {
+  background-color: #222;
+  border: 1px solid #444;
+}
+
+.dark-theme th {
+  background-color: #333;
+}
+
+.dark-theme td {
+  background-color: #2a2a2a;
+}
+
+.dark-theme tr:nth-child(even) {
+  background-color: #444;
+}
+
+/* Button Wrapper for positioning */
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #3b3b3b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
 }
